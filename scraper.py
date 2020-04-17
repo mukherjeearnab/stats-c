@@ -20,7 +20,7 @@ def saveG():
         flag = 0
         for child in children:
             if 'background:SkyBlue' in child.get('style'):
-                recoveries.append(child.get('title', 0))
+                recoveries.append(int(child.get('title', 0)))
                 flag = 1
                 continue
             elif 'background:Tomato' in child.get('style') and flag == 0 :
