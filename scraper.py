@@ -15,7 +15,7 @@ def saveG():
 
     recoveries = []
     for span in soup.find_all("div", attrs={"class": "bb-fl", "style": "background:SkyBlue;width:49.65px"}):
-        recoveries.append(int(span.title))
+        recoveries.append(span.title)
 
     diff = [population[0]]
 
