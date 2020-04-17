@@ -31,7 +31,7 @@ def saveG():
 
     print(recoveries)
 
-    '''diff = [population[0]]
+    diff = [population[0]]
 
     iterpop = iter(population)
     next(iterpop)
@@ -63,7 +63,7 @@ def saveG():
     # plt.xticks(rotation=90)
     # plt.legend()
     #plt.show()
-    plt.savefig('graph.png', format='png')'''
+    plt.savefig('graph.png', format='png')
     
 
 # import pandas as pd
