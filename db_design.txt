@@ -1,0 +1,47 @@
+DATABASE NAME: roadit
+ |
+ -> COLLECTIONS
+     |
+     -> 1) training_set
+            #COLLECTION USED FOR ML MODEL training_set
+            *DOCUMENT FIELDS
+                intensityX, intensityY, intensityZ, gAxis, latitude, longitude, speed, date-time, result, device
+                float       float       float       int    double    double     float  string     int     string
+                0.0000      0.0000      0.0000      0/1/2  0.0000    0.0000     0.0000 dd/mm/yy   1/0     N/A
+        
+        2) stage0
+            #DATA COLLECTION FROM REMOTE DEVICES, TO BE SEGREGATED BY ML MODEL
+            *DOCUMENT FIELDS
+                intensityX, intensityY, intensityZ, gAxis, latitude, longitude, speed, date-time
+                float       float       float       int    double    double     float  string   
+                0.0000      0.0000      0.0000      0/1/2  0.0000    0.0000     0.0000 dd/mm/yy
+
+        3) stage1
+            #DATA SEGREGATED BY ML MODEL, TO BE MERGED INTO SMALLER DATASET (MERGED ON BASIS OF COMMON LAT, LON)
+            *DOCUMENT FIELDS
+                intensityX, intensityY, intensityZ, gAxis, latitude, longitude, speed, date-time
+                float       float       float       int    double    double     float  string    
+                0.0000      0.0000      0.0000      0/1/2  0.0000    0.0000     0.0000 dd/mm/yy 
+
+        4) stage2
+            #DATA MERGED BY MAINTAINCE HANDLER, TO BE COMPRESSED INTO SMALLER DATASET (MERGED ON BASIS OF NEAR (~15M, ~15M) LAT, LON)
+            *DOCUMENT FIELDS
+                intensityX, intensityY, intensityZ, gAxis, latitude, longitude, speed, date-time, count
+                float       float       float       int    double    double     float  string     int
+                0.0000      0.0000      0.0000      0/1/2  0.0000    0.0000     0.0000 dd/mm/yy   0
+
+        5) stage3
+            #DATA COMPERSSED BY MAINTAINCE HANDLER AT STAGE 2, FOR FINAL STORAGE
+            *DOCUMENT FIELDS
+                intensityX, intensityY, intensityZ, gAxis, latitude, longitude, speed, date-time, count
+                float       float       float       int    double    double     float  string     int
+                0.0000      0.0000      0.0000      0/1/2  0.0000    0.0000     0.0000 dd/mm/yy   0
+
+
+
+
+
+
+
+
+                
