@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     sc.saveG()
-    return send_file('graph.png', mimetype='image/gif')
+    return send_file('graph.png', mimetype='image/png')
 
 if __name__ == '__main__':
     app.run()
