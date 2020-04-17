@@ -10,10 +10,12 @@ def saveG():
     soup = BeautifulSoup(page.content, "html.parser")
 
     population = []
-    date = []
-
     for span in soup.find_all("span", attrs={"class": "cbs-ibr", "style": "width:3.5em;padding:0 0.3em 0 0"}):
         population.append(int(span.text.replace(',', '')))
+
+    recoveries = []
+    for span in soup.find_all("div", attrs={"class": "bb-fl", "style": "background:SkyBlue;width:49.65px"}):
+        recoveries.append(int(span.title))
 
     diff = [population[0]]
 
@@ -34,6 +36,7 @@ def saveG():
     plt.figure(figsize=(19.20,10.80))
     plt.plot(dates, diff, label='New Cases')
     plt.plot(dates, population, label='Total Cases')
+    plt.plot(dates, recoveries, label='Recoveries')
     plt.ylabel('Cases')
     plt.xlabel('Date')
     plt.xticks(rotation=90)
