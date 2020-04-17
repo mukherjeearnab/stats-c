@@ -14,10 +14,24 @@ def saveG():
         population.append(int(span.text.replace(',', '')))
 
     recoveries = []
-    for span in soup.find_all("div", attrs={"class": "bb-fl", "style": "background:SkyBlue;width:49.65px"}):
-        recoveries.append(span.title)
+    flag = 0
+    for td in soup.find_all("td", attrs={"class": "bb-lr"}):
+        children = td.findChildren("div" , recursive=False)
+        flag = 0
+        for child in children:
+            if 'background:SkyBlue' in child.get('style'):
+                recoveries.append(child.get('title', 0))
+                flag = 1
+                continue
+            elif 'background:Tomato' in child.get('style') and flag == 0 :
+                recoveries.append(0)
+                continue
+            elif flag == 1:
+                continue
 
-    diff = [population[0]]
+    print(recoveries)
+
+    '''diff = [population[0]]
 
     iterpop = iter(population)
     next(iterpop)
@@ -49,7 +63,7 @@ def saveG():
     # plt.xticks(rotation=90)
     # plt.legend()
     #plt.show()
-    plt.savefig('graph.png', format='png')
+    plt.savefig('graph.png', format='png')'''
     
 
 # import pandas as pd
