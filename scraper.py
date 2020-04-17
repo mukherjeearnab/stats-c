@@ -7,7 +7,7 @@ def saveG():
     url = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_India'
     page = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'})
 
-    soup = BeautifulSoup(page.content, "lxml")
+    soup = BeautifulSoup(page.content, "html.parser")
 
     population = []
     date = []
