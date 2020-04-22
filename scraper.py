@@ -46,8 +46,8 @@ def saveG():
         dates.append(span.text)#.replace('2020-0', ''))
 
     import matplotlib.pyplot as plt
-    # import seaborn as sns
-    # sns.set()
+    import seaborn as sns
+    sns.set()
     plt.figure(figsize=(19.20,10.80))
     plt.plot(dates, diff, label='New Cases')
     plt.plot(dates, population, label='Total Cases')
