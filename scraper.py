@@ -32,6 +32,10 @@ def saveG():
     print(recoveries)
     print(population)
 
+    active = []
+    for o1, o2 in zip(population, recoveries):
+        active.append(o1-o2)
+
     diff = [population[0]]
 
     iterpop = iter(population)
@@ -52,6 +56,7 @@ def saveG():
     plt.plot(dates, diff, label='New Cases')
     plt.plot(dates, population, label='Total Cases')
     plt.plot(dates, recoveries, label='Recoveries')
+    plt.plot(dates, active, label='Active Cases')
     plt.ylabel('Cases')
     plt.xlabel('Date')
     plt.xticks(rotation=90)
