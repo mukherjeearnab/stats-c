@@ -17,6 +17,8 @@ def saveG():
     flag = 0
     for td in soup.find_all("td", attrs={"class": "bb-lr"}):
         children = td.findChildren("div" , recursive=False)
+        if len(children) == 0:
+            recoveries.append(0)
         flag = 0
         for child in children:
             if 'background:SkyBlue' in child.get('style'):
@@ -29,8 +31,8 @@ def saveG():
             elif flag == 1:
                 continue
 
-    print(recoveries)
-    print(population)
+    print(recoveries, len(recoveries))
+    print(population, len(population))
 
     active = []
     for o1, o2 in zip(population, recoveries):
@@ -48,6 +50,8 @@ def saveG():
     dates = []
     for span in soup.find_all("td", attrs={"class": "bb-04em","colspan": "2", "style": "text-align:center"}):
         dates.append(span.text)#.replace('2020-0', ''))
+
+    print(dates, len(dates))
 
     import matplotlib.pyplot as plt
     import seaborn as sns
