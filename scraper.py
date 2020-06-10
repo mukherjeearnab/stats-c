@@ -46,8 +46,24 @@ def saveG():
     print(population, len(population))
 
     active = []
-    for o1, o2 in zip(population, recoveries):
-        active.append(o1-o2)
+    for td in soup.find_all("td", attrs={"class": "bb-lr"}):
+        children = td.findChildren(
+            "div", attrs={"class": "bb-fl"}, recursive=False)
+        if len(children) == 0:
+            active.append(0)
+        flag = 0
+        for child in children:
+            if 'background:Tomato' in child.get('style'):
+                active.append(int(child.get('title', 0)))
+                '''flag = 1
+                continue
+            elif 'background:Tomato' in child.get('style') and flag == 0:
+                active.append(0)
+                continue
+            elif flag == 1:
+                continue'''
+
+    print(active)
 
     diff = [population[0]]
 
