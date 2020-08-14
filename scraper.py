@@ -14,7 +14,7 @@ def saveG():
     population = []
     index = 0
     for span in soup.find_all("span", attrs={"class": "cbs-ibr", "style": "padding:0 0.3em 0 0; width:4.55em"}):
-        if index % 2 != 0:
+        if index % 1 != 0:
             index += 1
             continue
         elif span.text == '':
@@ -42,8 +42,8 @@ def saveG():
             elif flag == 1:
                 continue
 
-    print(recoveries, len(recoveries))
-    print(population, len(population))
+    print(recoveries, len(recoveries), "RECOVERIES")
+    print(population, len(population), "DEATH")
 
     active = []
     for td in soup.find_all("td", attrs={"class": "bb-lr"}):
@@ -67,6 +67,11 @@ def saveG():
 
     diff = [population[0]]
 
+    for i in range(len(population)):
+        population[i] += recoveries[i] + active[i]
+
+    print(population, len(population), "TOTAL")
+
     iterpop = iter(population)
     next(iterpop)
     index = 0
@@ -83,12 +88,17 @@ def saveG():
         diffr.append(num - recoveries[index])
         index += 1
 
+    diffac = []
+    for i in range(len(diffr)):
+        diffac.append(diff[i] - diffr[i])
+
     dates = []
     for span in soup.find_all("td", attrs={"class": "bb-04em", "colspan": "2", "style": "text-align:center"}):
         # print(span.text)
         dates.append(span.text)  # .replace('2020-0', ''))
 
-    print(dates, len(dates))
+    print(dates, len(dates), "DATES")
+    print(active, len(active), "ACTIVE")
 
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -97,6 +107,7 @@ def saveG():
     # plt.subplots_adjust(left=0.5, right=0.5)
     plt.figure(figsize=(36.00, 10.80))
     plt.plot(dates, diff, label='New Cases')
+    plt.plot(dates, diffac, label='New Actives')
     plt.plot(dates, diffr, label='New Recoveries')
     plt.plot(dates, population, label='Total Cases')
     plt.plot(dates, recoveries, label='Recoveries')
@@ -106,6 +117,8 @@ def saveG():
     plt.xticks(rotation=90)
     plt.legend()
     # plt.show()
+
+    print(diff, diffr)
 
     # plt.plot(dates, diff, label='New Cases')
     # plt.ylabel('Cases')
